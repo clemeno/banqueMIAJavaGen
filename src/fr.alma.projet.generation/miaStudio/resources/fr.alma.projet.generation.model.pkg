@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="20"
+<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="22"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ModelGenerationScenario" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -19,11 +19,24 @@ for(ModelProperty model : current.getProperties()){
 return res;
 ]]></TEXT>
 	</TEXT_MACRO>
+	<TEXT_MACRO NAME="ComputeDependencies" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for(Model model : current.getOwnedElements()){
+	res += manager.getString(model, "ImportModelPackageTemplate");
+}
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
 	<SCRIPT NAME="ImplModel" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
 		<TEXT><![CDATA[
 package fr.alma.projet.generation.banque.model.impl;
 
 import fr.alma.projet.generation.banque.model.I[[name]];
+[[ComputeDependencies]]
+
+import java.util.List;
 
 public class [[name]] implements I[[name]]{
 [[PropertiesAccessorsImpl]]
@@ -36,6 +49,11 @@ public class [[name]] implements I[[name]]{
 	<SCRIPT NAME="ImplModel$Filename" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
 fr/alma/projet/generation/banque/model/impl/[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ImportModelPackageTemplate" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+import fr.alma.projet.generation.banque.model.I[[name]];
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="InterfaceModel" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
@@ -158,7 +176,7 @@ private List<I[[name@¤] list[[name]];
 	</SCRIPT>
 	<SCRIPT NAME="PropertyGetterImplTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-	public get[[name]](){
+	public String get[[name]](){
 		return this.[[name]];
 	}
 	

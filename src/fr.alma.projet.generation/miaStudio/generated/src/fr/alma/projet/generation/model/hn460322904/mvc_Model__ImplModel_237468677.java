@@ -71,6 +71,11 @@ _template_buffer.append('\n');
 _template_buffer.append("import fr.alma.projet.generation.banque.model.I");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
 _template_buffer.append('\n');
+
+_template_buffer.append(manager.action(current, "ComputeDependencies"));_template_buffer.append('\n');
+_template_buffer.append('\n');
+_template_buffer.append("import java.util.List;");
+_template_buffer.append('\n');
 _template_buffer.append('\n');
 _template_buffer.append("public class ");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(" implements I");
