@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="10"
+ DOCUMENTATION="">
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
+	<SCENARIO NAME="ModelGenerationScenario" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="Model"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="fr.alma.projet.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="InterfaceModel" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="fr.alma.projet.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="ImplModel" PARAM_COUNT="0"/>
+	</SCENARIO>
+	<SCRIPT NAME="ImplModel" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package fr.alma.projet.generation.banque.model.impl;
+
+import fr.alma.projet.generation.banque.model.I[[name]];
+
+public class [[name]] implements I[[name]]{
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="ImplModel$Filename" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+fr/alma/projet/generation/banque/model/impl/[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="InterfaceModel" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package fr.alma.projet.generation.banque.model;
+
+import java.util.List;
+
+public interface I[[name]] {
+[[PropertiesAccessors]]
+
+[[OwnedElementAccessors]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="InterfaceModel$Filename" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+fr/alma/projet/generation/banque/model/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="OwnedElementAccessors" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for(Model model : current.getOwnedElements()){
+	res += manager.getString(model, "OwnedElementGetterTemplate");
+	res += manager.getString(model, "OwnedElementSetterTemplate");
+}
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="OwnedElementGetterTemplate" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	public List<I[[name@¤] get[[name]]();
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="OwnedElementSetterTemplate" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void set[[name]](List<I[[name@¤] newValue);
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="PropertiesAccessors" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for(ModelProperty model : current.getProperties()){
+	res += manager.getString(current, "PropertyGetterTemplate");
+	res += manager.getString(current, "PropertySetterTemplate");
+}
+
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="PropertyGetterTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public String get[[name]]();
+	
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="PropertySetterTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void set[[name]](String newValue);
+	
+	
+]]></TEXT>
+	</SCRIPT>
+</PACKAGE>
