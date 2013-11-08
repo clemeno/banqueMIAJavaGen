@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_Model__InterfaceModel_N1107588140 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_ModelProperty__PropertySetterHeaderTemplate_1158001812 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_Model__InterfaceModel_N1107588140() {
+	public mvc_ModelProperty__PropertySetterHeaderTemplate_1158001812() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_Model__InterfaceModel_N1107588140(int anyInt, List anyList) {
+	mvc_ModelProperty__PropertySetterHeaderTemplate_1158001812(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_Model__InterfaceModel_N1107588140 implements com.mia.studio.ker
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"InterfaceModel", argument.getClass().getName(),
+								"PropertySetterHeaderTemplate", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,34 +52,23 @@ public class mvc_Model__InterfaceModel_N1107588140 implements com.mia.studio.ker
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''InterfaceModel''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''PropertySetterHeaderTemplate''");
 
-		final com.mia.formation.mvc.Model current = __check_arg__(com.mia.formation.mvc.Model.class, _action_parameters[0]);
+		final com.mia.formation.mvc.ModelProperty current = __check_arg__(com.mia.formation.mvc.ModelProperty.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
 		final com.mia.openapi.gen.GenerationServicesManager manager = __check_arg__(com.mia.openapi.gen.GenerationServicesManager.class, _action_parameters[2]);
 
 		return __invoke_user_code__(current, context, manager);
 	}
 
-	public String __invoke_user_code__(final com.mia.formation.mvc.Model current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
+	public String __invoke_user_code__(final com.mia.formation.mvc.ModelProperty current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("package fr.alma.projet.generation.banque.model;");
+_template_buffer.append("	public void set");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("(String newValue);");
 _template_buffer.append('\n');
-_template_buffer.append('\n');
-_template_buffer.append("import java.util.List;");
-_template_buffer.append('\n');
-_template_buffer.append('\n');
-_template_buffer.append("public interface I");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" {");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "PropertiesAccessorsHeader"));_template_buffer.append('\n');
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "OwnedElementAccessorsHeader"));_template_buffer.append('\n');
-_template_buffer.append("}");
+_template_buffer.append("	");
 return _template_buffer.toString();
 
 }

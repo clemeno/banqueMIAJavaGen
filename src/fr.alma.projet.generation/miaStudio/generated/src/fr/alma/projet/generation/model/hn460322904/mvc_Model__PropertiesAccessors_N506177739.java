@@ -66,8 +66,8 @@ public class mvc_Model__PropertiesAccessors_N506177739 implements com.mia.studio
 
 String res = "";
 	for(ModelProperty model : current.getProperties()){
-		res += manager.getString(model, "PropertyGetterTemplate");
-		res += manager.getString(model, "PropertySetterTemplate");
+		res += manager.getString(model, "PropertyGetterHeaderTemplate");
+		res += manager.getString(model, "PropertySetterHeaderTemplate");
 	}
 
 

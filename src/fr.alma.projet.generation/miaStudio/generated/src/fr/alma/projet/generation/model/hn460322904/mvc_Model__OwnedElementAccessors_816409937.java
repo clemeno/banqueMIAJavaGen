@@ -67,8 +67,8 @@ public class mvc_Model__OwnedElementAccessors_816409937 implements com.mia.studi
 String res = "";
 
 for(Model model : current.getOwnedElements()){
-	res += manager.getString(model, "OwnedElementGetterTemplate");
-	res += manager.getString(model, "OwnedElementSetterTemplate");
+	res += manager.getString(model, "OwnedElementGetterHeaderTemplate");
+	res += manager.getString(model, "OwnedElementSetterHeaderTemplate");
 }
 return res;
 
