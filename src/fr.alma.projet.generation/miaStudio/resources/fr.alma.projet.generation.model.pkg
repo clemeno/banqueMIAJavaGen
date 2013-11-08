@@ -68,11 +68,11 @@ return res;
 	<TEXT_MACRO NAME="PropertiesAccessors" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String res = "";
+	for(ModelProperty model : current.getProperties()){
+		res += manager.getString(model, "PropertyGetterTemplate");
+		res += manager.getString(model, "PropertySetterTemplate");
+	}
 
-for(ModelProperty model : current.getProperties()){
-	res += manager.getString(current, "PropertyGetterTemplate");
-	res += manager.getString(current, "PropertySetterTemplate");
-}
 
 
 return res;
@@ -82,13 +82,11 @@ return res;
 		<TEXT><![CDATA[
 	public String get[[name]]();
 	
-	
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="PropertySetterTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void set[[name]](String newValue);
-	
 	
 ]]></TEXT>
 	</SCRIPT>
