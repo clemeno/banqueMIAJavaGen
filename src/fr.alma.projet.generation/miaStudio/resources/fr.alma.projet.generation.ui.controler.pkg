@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="fr.alma.projet.generation.banque.ui.controller" METAMODEL="MVC" NUMBER="3"
+ DOCUMENTATION="">
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
+	<SCRIPT NAME="ActionTemplate" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+public void [[name]]();
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="InterfaceControler" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package fr.alma.projet.generation.banque.ui.controler;
+
+public interface I[[name]]{
+
+	public void initView();
+	
+}
+
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="InterfaceControler$Filename" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+fr/alma/projet/generation/banque/ui/controler/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+</PACKAGE>

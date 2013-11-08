@@ -1,0 +1,1 @@
+package fr.alma.projet.generation.ui.view.hn1699722626;

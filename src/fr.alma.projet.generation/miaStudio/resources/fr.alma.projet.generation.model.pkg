@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="23"
+<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="22"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ModelGenerationScenario" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -170,11 +170,6 @@ return res;
 		<TEXT><![CDATA[
 	private String [[name]];
 
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="OwnedElementAsAttributeTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
-		<TEXT><![CDATA[
-private List<I[[name@¤] list[[name]];
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="PropertyGetterHeaderTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
