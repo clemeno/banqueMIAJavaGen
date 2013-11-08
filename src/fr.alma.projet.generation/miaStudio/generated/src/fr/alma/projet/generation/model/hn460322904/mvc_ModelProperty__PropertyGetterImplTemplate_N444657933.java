@@ -65,7 +65,15 @@ public class mvc_ModelProperty__PropertyGetterImplTemplate_N444657933 implements
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("generated text");
+_template_buffer.append("	public get");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("(){");
+_template_buffer.append('\n');
+_template_buffer.append("		return this.");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
+_template_buffer.append('\n');
+_template_buffer.append("	}");
+_template_buffer.append('\n');
+_template_buffer.append("	");
 return _template_buffer.toString();
 
 }

@@ -65,7 +65,15 @@ public class mvc_ModelProperty__PropertySetterImplTemplate_475375719 implements 
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("generated text");
+_template_buffer.append("	public void set");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("(String newValue){");
+_template_buffer.append('\n');
+_template_buffer.append("		this.");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" = newValue;");
+_template_buffer.append('\n');
+_template_buffer.append("	}");
+_template_buffer.append('\n');
+_template_buffer.append("	");
 return _template_buffer.toString();
 
 }

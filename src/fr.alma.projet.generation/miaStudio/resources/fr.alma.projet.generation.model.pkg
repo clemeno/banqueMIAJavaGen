@@ -26,6 +26,7 @@ package fr.alma.projet.generation.banque.model.impl;
 import fr.alma.projet.generation.banque.model.I[[name]];
 
 public class [[name]] implements I[[name]]{
+[[PropertiesAccessorsImpl]]
 
 [[OwnedElementAccessorsImpl]]
 }
@@ -157,7 +158,10 @@ private List<I[[name@¤] list[[name]];
 	</SCRIPT>
 	<SCRIPT NAME="PropertyGetterImplTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-generated text
+	public get[[name]](){
+		return this.[[name]];
+	}
+	
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="PropertySetterHeaderTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
@@ -168,7 +172,10 @@ generated text
 	</SCRIPT>
 	<SCRIPT NAME="PropertySetterImplTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-generated text
+	public void set[[name]](String newValue){
+		this.[[name]] = newValue;
+	}
+	
 ]]></TEXT>
 	</SCRIPT>
 </PACKAGE>
