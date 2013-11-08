@@ -14,3 +14,9 @@ de code donnant à peu près le même résultat.
 - conception des scripts : la bonne séparation des scripts de generations dans des packages différents par
 responsabilité technique
 
+Git branching model
+-------------------
+
+We follow the following git branching model for this source code generator : 
+http://nvie.com/posts/a-successful-git-branching-mode
+
