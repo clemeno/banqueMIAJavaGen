@@ -69,8 +69,6 @@ _template_buffer.append("	public void set");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append("(String newValue);");
 _template_buffer.append('\n');
 _template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append("	");
 return _template_buffer.toString();
 
 }
