@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="22"
+<PACKAGE NAME="fr.alma.projet.generation.model" METAMODEL="MVC" NUMBER="23"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ModelGenerationScenario" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -39,8 +39,11 @@ import fr.alma.projet.generation.banque.model.I[[name]];
 import java.util.List;
 
 public class [[name]] implements I[[name]]{
-[[PropertiesAccessorsImpl]]
+[[AttributeDeclaration]]
 
+[[OwnedElementDeclaration]]
+
+[[PropertiesAccessorsImpl]]
 [[OwnedElementAccessorsImpl]]
 }
 ]]></TEXT>
@@ -97,6 +100,11 @@ for(Model model : current.getOwnedElements()){
 return res;
 ]]></TEXT>
 	</TEXT_MACRO>
+	<SCRIPT NAME="OwnedElementAsAttributeTemplate" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+private List<I[[name@¤] list[[name]];
+]]></TEXT>
+	</SCRIPT>
 	<TEXT_MACRO NAME="OwnedElementDeclaration" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String res = "";
@@ -160,7 +168,8 @@ return res;
 	</TEXT_MACRO>
 	<SCRIPT NAME="AttributeTemplate" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-private String [[name]];
+	private String [[name]];
+
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="OwnedElementAsAttributeTemplate" META_OBJECT="ModelProperty" CATEGORY="default">

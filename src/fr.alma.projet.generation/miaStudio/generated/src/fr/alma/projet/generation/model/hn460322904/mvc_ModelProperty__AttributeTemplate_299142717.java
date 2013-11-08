@@ -65,8 +65,10 @@ public class mvc_ModelProperty__AttributeTemplate_299142717 implements com.mia.s
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("private String ");
+_template_buffer.append("	private String ");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
+_template_buffer.append('\n');
+
 return _template_buffer.toString();
 
 }
