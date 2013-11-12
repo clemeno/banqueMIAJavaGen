@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.banque.ui.controller" METAMODEL="MVC" NUMBER="3"
+<PACKAGE NAME="fr.alma.projet.generation.banque.ui.controler" METAMODEL="MVC" NUMBER="5"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
-	<SCRIPT NAME="ActionTemplate" META_OBJECT="Action" CATEGORY="default">
+	<SCENARIO NAME="ControlerGenerator" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="fr.alma.projet.generation.banque.ui.controler" META_OBJECT="View" CATEGORY="default" NAME="InterfaceControler" PARAM_COUNT="0"/>
+	</SCENARIO>
+	<SCRIPT NAME="AvailableAction" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 public void [[name]]();
+	
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="InterfaceControler" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+	<TEXT_MACRO NAME="ComputeAvailableActions" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for(Action action : current.getActions()){
+	res += manager.getString(action, "AvailableAction");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="ComputeModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return current.getName().replace("View", "");
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="InterfaceControler" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
 		<TEXT><![CDATA[
 package fr.alma.projet.generation.banque.ui.controler;
 
-public interface I[[name]]{
+public interface I[[ComputeModelName]]Controler {
 
 	public void initView();
 	
-}
+[[ComputeAvailableActions]]
 
+}
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
 	</SCRIPT>
-	<SCRIPT NAME="InterfaceControler$Filename" META_OBJECT="Model" CATEGORY="default">
+	<SCRIPT NAME="InterfaceControler$Filename" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
-fr/alma/projet/generation/banque/ui/controler/I[[name]].java
+fr/alma/projet/generation/banque/ui/controler/I[[ComputeModelName]]Controler.java
 ]]></TEXT>
 	</SCRIPT>
 </PACKAGE>

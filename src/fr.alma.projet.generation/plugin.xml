@@ -5,10 +5,11 @@
       <package file="miaStudio/resources/fr.alma.projet.generation.model.pkg"/>
    </extension>
    
-   <extension point="com.mia.studio.generation.core.generation_package">
-      <package file="miaStudio/resources/fr.alma.projet.generation.ui.controler.pkg"/>
-   </extension>
+   
    <extension point="com.mia.studio.generation.core.generation_package">
       <package file="miaStudio/resources/fr.alma.projet.generation.ui.view.pkg"/>
+   </extension>
+   <extension point="com.mia.studio.generation.core.generation_package">
+      <package file="miaStudio/resources/fr.alma.projet.generation.ui.controler.pkg"/>
    </extension>
 </plugin>
