@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.ui.view" METAMODEL="MVC" NUMBER="11"
+<PACKAGE NAME="fr.alma.projet.generation.ui.view" METAMODEL="MVC" NUMBER="21"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ViewGeneration" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
@@ -20,6 +20,21 @@ private Button btn[[name]];
 	
 ]]></TEXT>
 	</SCRIPT>
+	<SCRIPT NAME="ButtonActionImpl" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+btn[[name]] = new Button(grpButtons, SWT.NONE);
+		btn[[name]].setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
+		btn[[name]].setText("[[name]]");
+		btn[[name]].addSelectionListener(new SelectionAdapter(){
+		        public void widgetSelected(SelectionEvent event)
+		        {
+		          [[name]]();
+		        }
+		      });
+		      
+        
+]]></TEXT>
+	</SCRIPT>
 	<SCRIPT NAME="UnimplementedMethod" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 public void [[name]](){
@@ -29,12 +44,64 @@ public void [[name]](){
 	
 ]]></TEXT>
 	</SCRIPT>
+	<SCRIPT NAME="OwnedElementDeclarationView" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+public List [[name]]List;
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="OwnedElementImplView" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+
+		// Liste
+		Group grp[[name]] = new Group(this, SWT.NONE);
+		grp[[name]].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		grp[[name]].setText("Liste des [[name]]s");
+		grp[[name]].setLayout(new GridLayout());
+
+		this.[[name]]List = new List(grp[[name]], SWT.BORDER | SWT.V_SCROLL | SWT.SINGLE);
+		this.[[name]]List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+		for (final I[[name]] elt : this.model.get[[name]]s()) {
+			this.[[name]]List.add(elt.toString());
+		}
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="OwnedElementPackageImport" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+import fr.alma.projet.generation.banque.model.I[[name]];
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="PropertyContent" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+Label lbl[[name]] = new Label(this, SWT.NONE);
+		lbl[[name]].setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
+		lbl[[name]].setText("[[name]]");
+
+		Text [[name]]Field = new Text(this, SWT.BORDER);
+		[[name]]Field.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+		[[name]]Field.setText(this.model.get[[name]]());
+]]></TEXT>
+	</SCRIPT>
 	<TEXT_MACRO NAME="AvailableActions" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String res = "";
 
 for (Action action : current.getActions()) {
 	res += manager.getString(action, "ActionDeclaration");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="ButtonActionImpl" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Action action : current.getActions()) {
+	res += manager.getString(action, "ButtonActionImpl");
 }
 
 return res;
@@ -71,6 +138,7 @@ import org.eclipse.swt.widgets.Group;
 import fr.alma.projet.generation.banque.ui.controler.I[[ModelName]]Controler;
 import fr.alma.projet.generation.banque.ui.view.I[[name]];
 import fr.alma.projet.generation.banque.model.I[[ModelName]];
+[[OwnedElementPackageImport]]
 
 public class [[name]] extends Shell implements I[[name]]{
 
@@ -78,6 +146,7 @@ public class [[name]] extends Shell implements I[[name]]{
 	private I[[ModelName]] model;
 	
 	[[ButtonsActionDeclaration]]
+	[[OwnedElementDeclaration]]
 	
 	public [[name]](Display display, I[[ModelName]] model, I[[ModelName]]Controler controler){
 		super(display, SWT.SHELL_TRIM);
@@ -93,6 +162,14 @@ public class [[name]] extends Shell implements I[[name]]{
 		setSize(458,308);
 		setLayout(new GridLayout(2, false));
 		
+		[[PropertyContent]]
+		[[OwnedElementImpl]]
+		
+		Group grpButtons = new Group(this, SWT.NONE);
+		grpButtons.setLayout(new GridLayout(2, false));
+		grpButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		
+		[[ButtonActionImpl]]
 	}
 	
 	@Override
@@ -128,6 +205,50 @@ fr/alma/projet/generation/banque/ui/view/I[[name]].java
 	<TEXT_MACRO NAME="ModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 return current.getName().replace("View", "");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="OwnedElementDeclaration" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model elem : current.getModel().getOwnedElements()) {
+	res += manager.getString(elem, "OwnedElementDeclarationView");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="OwnedElementImpl" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model element : current.getModel().getOwnedElements()) {
+	res += manager.getString(element, "OwnedElementImplView");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="OwnedElementPackageImport" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model element : current.getModel().getOwnedElements()) {
+	res += manager.getString(element, "OwnedElementPackageImport");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="PropertyContent" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (ModelProperty property : current.getModel().getProperties()) {
+	res += manager.getString(property, "PropertyContent");
+}
+
+return res;
 ]]></TEXT>
 	</TEXT_MACRO>
 	<TEXT_MACRO NAME="UnimplementedMethods" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
