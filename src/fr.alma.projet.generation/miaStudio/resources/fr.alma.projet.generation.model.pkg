@@ -36,6 +36,7 @@ package fr.alma.projet.generation.banque.model.impl;
 import fr.alma.projet.generation.banque.model.I[[name]];
 [[ComputeDependencies]]
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class [[name]] implements I[[name]]{
@@ -125,6 +126,9 @@ return res;
 	<SCRIPT NAME="OwnedElementGetterImplTemplate" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
 	public List<I[[name@¤] get[[name]]s(){
+		if(this.list[[name]] == null){
+			this.list[[name]] = new ArrayList<>();
+		}
 		return this.list[[name]];
 	}
 	

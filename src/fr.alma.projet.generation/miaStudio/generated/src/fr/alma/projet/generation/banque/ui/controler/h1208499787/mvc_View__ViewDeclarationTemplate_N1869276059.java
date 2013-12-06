@@ -1,4 +1,4 @@
-package fr.alma.projet.generation.model.hn460322904;
+package fr.alma.projet.generation.banque.ui.controler.h1208499787;
 
 import com.mia.formation.mvc.*;
 import com.mia.metamodel.*;
@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_Model__OwnedElementGetterImplTemplate_N1731881280 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_View__ViewDeclarationTemplate_N1869276059 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_Model__OwnedElementGetterImplTemplate_N1731881280() {
+	public mvc_View__ViewDeclarationTemplate_N1869276059() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_Model__OwnedElementGetterImplTemplate_N1731881280(int anyInt, List anyList) {
+	mvc_View__ViewDeclarationTemplate_N1869276059(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_Model__OwnedElementGetterImplTemplate_N1731881280 implements co
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"OwnedElementGetterImplTemplate", argument.getClass().getName(),
+								"ViewDeclarationTemplate", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,37 +52,23 @@ public class mvc_Model__OwnedElementGetterImplTemplate_N1731881280 implements co
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''OwnedElementGetterImplTemplate''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''ViewDeclarationTemplate''");
 
-		final com.mia.formation.mvc.Model current = __check_arg__(com.mia.formation.mvc.Model.class, _action_parameters[0]);
+		final com.mia.formation.mvc.View current = __check_arg__(com.mia.formation.mvc.View.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
 		final com.mia.openapi.gen.GenerationServicesManager manager = __check_arg__(com.mia.openapi.gen.GenerationServicesManager.class, _action_parameters[2]);
 
 		return __invoke_user_code__(current, context, manager);
 	}
 
-	public String __invoke_user_code__(final com.mia.formation.mvc.Model current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
+	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("	public List<I");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append("> get");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append("s(){");
+_template_buffer.append("private ");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" view;");
 _template_buffer.append('\n');
-_template_buffer.append("		if(this.list");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" == null){");
-_template_buffer.append('\n');
-_template_buffer.append("			this.list");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" = new ArrayList<>();");
-_template_buffer.append('\n');
-_template_buffer.append("		}");
-_template_buffer.append('\n');
-_template_buffer.append("		return this.list");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
-_template_buffer.append('\n');
-_template_buffer.append("	}");
-_template_buffer.append('\n');
-_template_buffer.append("	");
+
 return _template_buffer.toString();
 
 }

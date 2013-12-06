@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="fr.alma.projet.generation.banque.ui.controler" METAMODEL="MVC" NUMBER="5"
+<PACKAGE NAME="fr.alma.projet.generation.banque.ui.controler" METAMODEL="MVC" NUMBER="13"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ControlerGenerator" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
 		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
 		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="fr.alma.projet.generation.banque.ui.controler" META_OBJECT="View" CATEGORY="default" NAME="InterfaceControler" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="fr.alma.projet.generation.banque.ui.controler" META_OBJECT="View" CATEGORY="default" NAME="ControlerImpl" PARAM_COUNT="0"/>
 	</SCENARIO>
 	<SCRIPT NAME="AvailableAction" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
@@ -13,6 +14,44 @@ public void [[name]]();
 	
 ]]></TEXT>
 	</SCRIPT>
+	<SCRIPT NAME="AvailableActionImpl" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+public void [[name]](){
+	// Start of user code for [[name]]
+		
+	// End of user code for [[name]]
+}
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="QuitActionImpl" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+public void quitter(){
+	// Start of user code for quitter
+		//On veut fermer toutes les fenêtres ouvertes
+		Display.getCurrent().dispose();
+	// End of user code for quitter
+}
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ModelDeclarationTemplate" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+private I[[name]] model;
+
+
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="AttributeDeclaration" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+res += manager.getString(current, "ViewDeclarationTemplate");
+res += manager.getString(current.getModel(), "ModelDeclarationTemplate");
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
 	<TEXT_MACRO NAME="ComputeAvailableActions" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String res = "";
@@ -24,11 +63,81 @@ for(Action action : current.getActions()){
 return res;
 ]]></TEXT>
 	</TEXT_MACRO>
+	<TEXT_MACRO NAME="ComputeAvailableActionsImpl" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Action action : current.getActions()) {
+	if(action.getName().equals("quitter")){
+		res += manager.getString(action, "QuitActionImpl");
+	}else{
+		res += manager.getString(action, "AvailableActionImpl");
+	}
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
 	<TEXT_MACRO NAME="ComputeModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 return current.getName().replace("View", "");
 ]]></TEXT>
 	</TEXT_MACRO>
+	<SCRIPT NAME="ControlerImpl" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package fr.alma.projet.generation.banque.ui.controler.swt;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Group;
+
+import fr.alma.projet.generation.banque.ui.controler.I[[ComputeModelName]]Controler;
+import fr.alma.projet.generation.banque.ui.view.I[[name]];
+import fr.alma.projet.generation.banque.ui.view.swt.[[name]];
+import fr.alma.projet.generation.banque.model.I[[ComputeModelName]];
+
+public class [[ComputeModelName]]Controler implements I[[ComputeModelName]]Controler {
+	[[AttributeDeclaration]]
+	
+	public [[ComputeModelName]]Controler(I[[ComputeModelName]] model) {
+		this.model = model;
+	}
+	
+	public void initView() {
+		Display display = Display.getDefault();
+		
+		this.view = new [[name]](display, this.model, this);
+		this.view.open();
+		this.view.layout();
+		
+		while (!this.view.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+
+	}
+	
+	[[ComputeAvailableActionsImpl]]
+	
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="ControlerImpl$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+fr/alma/projet/generation/banque/ui/controler/swt/[[ComputeModelName]]Controler.java
+]]></TEXT>
+	</SCRIPT>
 	<SCRIPT NAME="InterfaceControler" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
 		<TEXT><![CDATA[
 package fr.alma.projet.generation.banque.ui.controler;
@@ -46,6 +155,12 @@ public interface I[[ComputeModelName]]Controler {
 	<SCRIPT NAME="InterfaceControler$Filename" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
 fr/alma/projet/generation/banque/ui/controler/I[[ComputeModelName]]Controler.java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ViewDeclarationTemplate" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+private [[name]] view;
+
 ]]></TEXT>
 	</SCRIPT>
 </PACKAGE>

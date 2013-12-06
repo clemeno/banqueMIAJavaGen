@@ -7,6 +7,7 @@ public interface ICompte {
 		public void setNumero(String newValue);
 	
 
-	public List<IOperation> getOperation();
-	public void setOperation(List<IOperation> newValue);
+	public List<IOperation> getOperations();
+	public void setOperations(List<IOperation> newValue);
+	
 }

@@ -11,6 +11,7 @@ public interface IClient {
 		public void setAdresse(String newValue);
 	
 
-	public List<ICompte> getCompte();
-	public void setCompte(List<ICompte> newValue);
+	public List<ICompte> getComptes();
+	public void setComptes(List<ICompte> newValue);
+	
 }
